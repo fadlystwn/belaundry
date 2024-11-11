@@ -1,14 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Dashboard from './components/Dashboard';
-import Product from './components/Product';
+import HomeDashboard from './HomeDashboard';
+import ProductDashboard from './ProductDashboard';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Dashboard />,
+    element: <HomeDashboard />,
   },
   {
     path: '/product',
-    element: <Product />,
+    element: <ProductDashboard />,
   },
 ]);
