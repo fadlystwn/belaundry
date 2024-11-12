@@ -48,7 +48,7 @@ const DashboardLayout: React.FC<LayoutProps> = ({ children }) => {
 
       <div className="flex-1 transition duration-300 ease-in-out">
         <Navbar toggleSidebar={toggleSidebar} />
-        <div className="p-8 text-center text-gray-500">{children}</div>
+        <div className="p-8  text-gray-500">{children}</div>
       </div>
     </div>
   );

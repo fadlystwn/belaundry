@@ -8,21 +8,7 @@ const Navbar: React.FC<{ toggleSidebar: () => void }> = ({ toggleSidebar }) => {
         onClick={toggleSidebar}
         className="lg:hidden p-2 focus:outline-none"
       >
-        {/* Burger menu icon */}
-        <svg
-          className="w-6 h-6 text-gray-800"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h16m-7 6h7"
-          ></path>
-        </svg>
+        <SvgIcon src="./icons/logo.svg" width={56} className="mr-1" />
       </button>
       <h1 className="text-2xl font-semibold">Home</h1>
       <div className="flex items-center space-x-4">
