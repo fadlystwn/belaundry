@@ -1,22 +1,52 @@
 import { Link } from 'react-router-dom';
 import SvgIcon from '../../components/SvgIcon';
+import { useState } from 'react';
 
 type SidebarProps = {
   isSidebarVisible: boolean;
   toggleSidebar: () => void;
 };
 
+// Define the menu items as a constant
+const MENU_ITEMS = [
+  {
+    path: '/',
+    label: 'Home',
+    icon: './icons/home.svg',
+    hoverIcon: './icons/home-active.svg',
+  },
+  {
+    path: '/products',
+    label: 'Products',
+    icon: './icons/folder_open.svg',
+    hoverIcon: './icons/folder_open-active.svg',
+  },
+  {
+    path: '/sales',
+    label: 'Sales',
+    icon: './icons/line_chart_up.svg',
+    hoverIcon: './icons/line_chart_up-active.svg',
+  },
+  {
+    path: '/settings',
+    label: 'Settings',
+    icon: './icons/settings.svg',
+    hoverIcon: './icons/settings-active.svg',
+  },
+];
+
 const Sidebar: React.FC<SidebarProps> = ({
   isSidebarVisible,
   toggleSidebar,
 }) => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <div
       className={`fixed top-0 left-0 h-screen bg-blue text-white p-5 transition-transform transform ${
         isSidebarVisible ? 'translate-x-0' : '-translate-x-full'
       } lg:translate-x-0 w-64 z-20`}
     >
-      {/* Close button for mobile */}
       <button
         onClick={toggleSidebar}
         className="lg:hidden absolute top-4 right-4 text-white"
@@ -25,46 +55,27 @@ const Sidebar: React.FC<SidebarProps> = ({
       </button>
 
       <div className="flex items-center mb-10">
-        <div className="w-10 h-10 bg-red-500 rounded-full mr-3"></div>
+        <SvgIcon src="./icons/logo.svg" width={56} className="mr-1" />
         <span className="text-xl font-bold">BeLaundry</span>
       </div>
 
       <div className="space-y-4">
-        <Link
-          to="/"
-          className="flex items-center p-4 hover:bg-white hover:text-blue"
-        >
-          <SvgIcon src="./icons/home.svg" width={16} className="mr-3" />
-          Home
-        </Link>
-
-        <Link
-          to="/products"
-          className="flex items-center p-4 hover:bg-white hover:text-blue"
-        >
-          <SvgIcon src="./icons/folder_open.svg" width={16} className="mr-3" />
-          Products
-        </Link>
-
-        <Link
-          to="/sales"
-          className="flex items-center p-4 hover:bg-white hover:text-blue"
-        >
-          <SvgIcon
-            src="./icons/line_chart_up.svg"
-            width={16}
-            className="mr-3"
-          />
-          Sales
-        </Link>
-
-        <Link
-          to="/settings"
-          className="flex items-center p-4 hover:bg-white hover:text-blue"
-        >
-          <SvgIcon src="./icons/settings.svg" width={16} className="mr-3" />
-          Settings
-        </Link>
+        {MENU_ITEMS.map((item, index) => (
+          <Link
+            key={item.path}
+            to={item.path}
+            className="flex items-center p-4 hover:bg-white hover:text-blue hover:rounded-lg"
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <SvgIcon
+              src={hoveredIndex === index ? item.hoverIcon : item.icon}
+              width={16}
+              className="mr-3"
+            />
+            {item.label}
+          </Link>
+        ))}
       </div>
     </div>
   );

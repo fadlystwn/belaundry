@@ -8,7 +8,7 @@ const TopSellingProduct: React.FC = () => {
   ];
 
   return (
-    <div className="p-4 rounded-lg shadow bg-white mt-4">
+    <div className="w-full md:w-1/3 p-4 rounded-lg shadow bg-white mt-4">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-bold">Top selling product</h2>
         <select
