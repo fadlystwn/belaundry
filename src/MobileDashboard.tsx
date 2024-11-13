@@ -24,18 +24,17 @@ const Dashboard: React.FC = () => {
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'bottom',
             backgroundSize: 'cover',
-            width: '450px',
             height: '360px',
             margin: '-160px auto',
-            top: '60px',
+            top: '48px',
             left: 0,
             right: 0,
             zIndex: 0,
           }}
         />
         {/* Welcome and Balance Card */}
-        <div className="relative z-10">
-          <h1 className="text-white font-bold po"> welcome John</h1>
+        <div className="relative z-10 top-10">
+          <h1 className="text-white mb-3 text-xl">Welcome John</h1>
           <BalanceCard />
 
           {/* Previous Order */}
@@ -84,7 +83,7 @@ const Dashboard: React.FC = () => {
                 alt="Most ordered"
                 className="w-full h-72 sm:h-40 object-cover rounded-lg"
               />
-              <div className="absolute bottom-0 left-0 bg-gradient-to-t from-blue to-transparent w-full p-2 text-white text-xs sm:text-sm">
+              <div className="absolute bottom-0 left-0 bg-gradient-to-t from-blue to-transparent w-full p-5 text-white text-xs sm:text-sm">
                 <p className="font-semibold text-2xl">Dry Cleaning</p>
                 <p className="text-sm">12x | total of $ 4,000</p>
               </div>
@@ -104,7 +103,7 @@ const Dashboard: React.FC = () => {
                   alt="Jeans"
                   className="w-full h-24 sm:h-28 object-cover rounded-lg"
                 />
-                <div className="absolute bottom-0 left-0 bg-gradient-to-t from-blue to-transparent w-full p-2 text-white text-xs sm:text-sm">
+                <div className="absolute bottom-0 left-0 bg-gradient-to-t from-blue to-transparent w-full p-1 text-white text-xs sm:text-sm">
                   <p className="text-xs">Dry Cleaning</p>
                   <p className="font-semibold text-2xl">Jeans</p>
                   <p className="text-xl">$ 10.00/pc</p>
@@ -117,7 +116,7 @@ const Dashboard: React.FC = () => {
                   alt="T-Shirt"
                   className="w-full h-24 sm:h-28 object-cover rounded-lg"
                 />
-                <div className="absolute bottom-0 left-0 bg-gradient-to-t from-blue to-transparent w-full p-2 text-white text-xs sm:text-sm">
+                <div className="absolute bottom-0 left-0 bg-gradient-to-t from-blue to-transparent w-full p-1 text-white text-xs sm:text-sm">
                   <p className="text-xs">Dry Cleaning</p>
                   <p className="font-semibold text-2xl">T-Shirt</p>
                   <p className="text-xl">$ 6.00/pc</p>

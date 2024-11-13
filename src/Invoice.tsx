@@ -94,7 +94,7 @@ const InvoicePage: React.FC = () => {
       </div>
 
       {/* WhatsApp Button */}
-      <button className="bg-mintGreen text-white font-semibold mt-6 py-2 w-full rounded-lg flex items-center shadow-lg">
+      <button className="bg-mintGreen text-white font-semibold mt-6 py-2 px-5 rounded-lg flex items-center shadow-lg">
         <SvgIcon src="./icons/message.svg" width={32} className="mr-3" />
         WHATSAPP US
       </button>
