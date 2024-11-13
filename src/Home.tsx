@@ -3,7 +3,6 @@ import BalanceCard from './components/BalanceCard';
 import LatestProducts from './components/LatestProducts';
 import PreviousOrder from './components/PreviousOrder';
 import MostOrdered from './components/MostOrdered';
-import { Product } from './interfaces/Product';
 import useSWR from 'swr';
 import { useAuth } from './hooks/useAuth';
 
@@ -40,7 +39,7 @@ const Home: React.FC = () => {
   const { data, error } = useSWR([`${apiUrl}/product`, token], ([url, token]) =>
     fetchWithToken(url, token),
   );
-  console.log('HELLO 1', token, data, error);
+
   return (
     <div className="bg-lightBlue p-4 sm:p-6 md:p-8 w-full max-w-md mx-auto space-y-6">
       <div
