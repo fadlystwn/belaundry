@@ -68,7 +68,7 @@ const Home: React.FC = () => {
         ) : !data ? (
           <div>Loading...</div>
         ) : (
-          <LatestProducts data={data} />
+          <LatestProducts data={data.response.slice(0, 2)} />
         )}
       </div>
     </div>

@@ -41,7 +41,6 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (values: LoginFormValues) => {
     try {
       const result = await trigger(values);
-      console.log('HELLO 2', result.response);
       if (result.status) {
         login(result.response);
         navigate('/');
@@ -52,8 +51,6 @@ const LoginPage: React.FC = () => {
       console.error('Login failed', error);
     }
   };
-
-  console.log('HELLO 3', login);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-lightBlue">
