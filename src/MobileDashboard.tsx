@@ -38,7 +38,7 @@ const Dashboard: React.FC = () => {
           <BalanceCard />
 
           {/* Previous Order */}
-          <h3 className="text-gray-700 text-sm sm:text-base uppercase font-bold mb-2">
+          <h3 className="text-blue text-sm sm:text-base uppercase font-bold mb-2">
             Previous Order
           </h3>
           <div className="bg-white mb-10 rounded-lg shadow-md">
@@ -73,7 +73,7 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Most Ordered */}
-          <h3 className="text-gray-700 text-sm sm:text-base uppercase font-bold">
+          <h3 className="text-blue text-sm sm:text-base uppercase font-bold">
             Your Most Ordered
           </h3>
           <div className="mb-10 rounded-lg shadow-md">
@@ -91,7 +91,7 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* Latest Product */}
-          <h3 className="text-gray-700 text-sm sm:text-base uppercase font-bold mb-2">
+          <h3 className="text-blue text-sm sm:text-base uppercase font-bold mb-2">
             Our Latest Product
           </h3>
           <div className="mb-10 rounded-lg shadow-md">
