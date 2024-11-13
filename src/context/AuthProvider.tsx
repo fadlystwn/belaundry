@@ -14,8 +14,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    const storedUser = localStorage.getItem('user');
-    if (storedToken && storedUser) {
+    if (storedToken) {
       dispatch({
         type: 'LOGIN',
         payload: { token: storedToken },
@@ -30,7 +29,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const logout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
     dispatch({ type: 'LOGOUT' });
   };
 
