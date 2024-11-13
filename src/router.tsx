@@ -4,8 +4,13 @@ import ProductDashboard from './ProductDashboard';
 import Home from './Home';
 import InvoicePage from './Invoice';
 import ProductDetailPage from './ProductDetails';
+import LoginPage from './Login';
 
 export const router = createBrowserRouter([
+  {
+    path: '/login',
+    element: <LoginPage />,
+  },
   {
     path: '/dashboard',
     element: <HomeDashboard />,

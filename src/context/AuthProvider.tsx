@@ -1,6 +1,11 @@
 // AuthProvider.tsx
-import React, { useState, ReactNode } from 'react';
-import { AuthContext } from './AuthContext';
+import React, { ReactNode, useReducer } from 'react';
+import {
+  authReducer,
+  initialState,
+  AuthContext,
+  AuthContextType,
+} from './AuthContext';
 
 interface User {
   id: string;
@@ -8,28 +13,27 @@ interface User {
   email: string;
 }
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [state, dispatch] = useReducer(authReducer, initialState);
 
   const login = (userData: User) => {
-    setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
+    dispatch({ type: 'LOGIN', payload: userData });
   };
 
   const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
+    dispatch({ type: 'LOGOUT' });
   };
 
-  const isAuthenticated = !!user;
+  const isAuthenticated = Boolean(state.user);
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const value: AuthContextType = {
+    user: state.user,
+    login,
+    logout,
+    isAuthenticated,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
