@@ -1,50 +1,72 @@
-# React + TypeScript + Vite
+# Vite Project Setup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is set up with Vite, React, and React Router. The following guide will help you get started and provide an overview of the project's routes and their functionalities.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## Expanding the ESLint configuration
+- **Node.js** (version 14.18+ recommended)
+- **npm** (preferred package manager)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Installation
 
-- Configure the top-level `parserOptions` property like this:
+1. **Clone the Repository**:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+   ```bash
+   git clone https://github.com/fadlystwn/belaundry.git
+   cd belaundry
+   ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. **Install Dependencies**:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+   ```bash
+   npm install
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+3. **Run the Development Server**:
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for Production**:
+   ```bash
+   npm run build
+   ```
+
+## Project Structure
+
+The main pages in this project include:
+
+- **HomeDashboard**: The dashboard page displaying home-related content.
+- **ProductDashboard**: The main products dashboard for managing product data.
+- **Home**: The landing page or homepage of the application.
+- **InvoicePage**: A page to view or manage invoices.
+- **ProductDetailPage**: A detailed view of a specific product.
+- **LoginPage**: The login page for user authentication.
+
+### Routing
+
+The project uses `react-router-dom` for client-side routing. Here is an overview of the routes configured:
+
+### Available Routes
+
+| Path               | Component           | Description                                     |
+| ------------------ | ------------------- | ----------------------------------------------- |
+| `/login`           | `LoginPage`         | User login page                                 |
+| `/dashboard`       | `HomeDashboard`     | Main dashboard with home-related information    |
+| `/`                | `Home`              | Homepage or landing page                        |
+| `/products`        | `ProductDashboard`  | Product dashboard displaying a list of products |
+| `/product-details` | `ProductDetailPage` | Detailed view of an individual product          |
+| `/invoice`         | `InvoicePage`       | Invoice page for managing invoices              |
+
+## Scripts
+
+- **`npm run dev`**: Starts the development server.
+- **`npm run build`**: Builds the project for production.
+- **`npm run preview`**: Previews the production build.
+
+## Additional Information
+
+For more details on Vite setup and advanced configurations, refer to the [Vite Documentation](https://vitejs.dev/guide/).
