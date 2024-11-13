@@ -7,29 +7,23 @@ import {
   AuthContextType,
 } from './AuthContext';
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
-
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  const login = (userData: User) => {
-    dispatch({ type: 'LOGIN', payload: userData });
+  const login = (token: string) => {
+    dispatch({ type: 'LOGIN', payload: { token } });
   };
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
   };
 
-  const isAuthenticated = Boolean(state.user);
+  const isAuthenticated = Boolean(state.token);
 
   const value: AuthContextType = {
-    user: state.user,
+    token: state.token,
     login,
     logout,
     isAuthenticated,

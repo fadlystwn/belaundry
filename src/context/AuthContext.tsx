@@ -1,42 +1,50 @@
+// AuthContext.tsx
 import { createContext } from 'react';
 
-interface User {
+export interface User {
   id: string;
   name: string;
   email: string;
 }
 
+export interface AuthState {
+  token: string | null;
+}
+
+export const initialState: AuthState = {
+  token: null,
+};
+
 export interface AuthContextType {
-  user: User | null;
-  login: (userData: User) => void;
+  token: string | null;
+  login: (token: string) => void;
   logout: () => void;
   isAuthenticated: boolean;
 }
 
-type AuthState = {
-  user: User | null;
-};
+export const AuthContext = createContext<AuthContextType>({
+  token: null,
+  login: () => {},
+  logout: () => {},
+  isAuthenticated: false,
+});
 
-type AuthAction = { type: 'LOGIN'; payload: User } | { type: 'LOGOUT' };
+// Define actions
+type AuthAction =
+  | { type: 'LOGIN'; payload: { token: string } }
+  | { type: 'LOGOUT' };
 
-export const initialState: AuthState = {
-  user: null,
-};
-
+// Reducer function
 export const authReducer = (
   state: AuthState,
   action: AuthAction,
 ): AuthState => {
   switch (action.type) {
     case 'LOGIN':
-      return { user: action.payload };
+      return { token: action.payload.token };
     case 'LOGOUT':
-      return { user: null };
+      return { token: null };
     default:
       return state;
   }
 };
-
-export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined,
-);

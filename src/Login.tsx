@@ -22,10 +22,7 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const apiUrl = import.meta.env.VITE_API_URL;
-  const { trigger, isMutating } = useSWRMutation(
-    `${apiUrl}/user/sign-in`,
-    sendRequest,
-  );
+  const { trigger } = useSWRMutation(`${apiUrl}/user/sign-in`, sendRequest);
 
   const initialValues: LoginFormValues = {
     email: '',
@@ -44,14 +41,19 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (values: LoginFormValues) => {
     try {
       const result = await trigger(values);
-      if (result) {
-        login(result);
+      console.log('HELLO 2', result.response);
+      if (result.status) {
+        login(result.response);
         navigate('/');
+      } else {
+        console.error('Login failed: invalid response structure');
       }
     } catch (error) {
       console.error('Login failed', error);
     }
   };
+
+  console.log('HELLO 3', login);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-lightBlue">
