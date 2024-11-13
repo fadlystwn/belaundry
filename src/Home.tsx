@@ -3,7 +3,7 @@ import React from 'react';
 import BalanceCard from './components/BalanceCard';
 import SvgIcon from './components/SvgIcon';
 
-const Dashboard: React.FC = () => {
+const Home: React.FC = () => {
   const svgBackground = `
   <svg width="375" height="255" viewBox="0 0 375 255" fill="none" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="183.5" cy="53" rx="283.5" ry="202" fill="#F36868"/>
@@ -130,4 +130,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default Home;
