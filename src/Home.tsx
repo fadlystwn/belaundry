@@ -5,22 +5,7 @@ import PreviousOrder from './components/PreviousOrder';
 import MostOrdered from './components/MostOrdered';
 import useSWR from 'swr';
 import { useAuth } from './hooks/useAuth';
-
-const fetchWithToken = async (url: string, token: unknown) => {
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      token: `${token}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-
-  return response.json();
-};
+import { fetchWithToken } from './utils/fetchApi';
 
 const Home: React.FC = () => {
   const { token } = useAuth();

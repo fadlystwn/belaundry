@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useSWR from 'swr';
 import {
   BarChart,
   Bar,
@@ -7,17 +8,13 @@ import {
   ResponsiveContainer,
   LabelList,
 } from 'recharts';
-
-const data = [
-  { date: '11/05', items: 4 },
-  { date: '12/05', items: 6 },
-  { date: '13/05', items: 3 },
-  { date: '14/05', items: 7 },
-  { date: '15/05', items: 8 },
-  { date: '16/05', items: 5 },
-  { date: '17/05', items: 6 },
-  { date: '18/05', items: 7 },
-];
+import { fetchWithToken } from '../utils/fetchApi';
+import { useAuth } from '../hooks/useAuth';
+export interface Report {
+  created_at: string;
+  total: number;
+  income: string;
+}
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
@@ -33,10 +30,22 @@ const CustomTooltip = ({ active, payload }: any) => {
 const ProductSoldChart: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [sortOption, setSortOption] = useState<string>('This week');
+  const { token } = useAuth();
+
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  // Fetch data using SWR
+  const { data, error } = useSWR(
+    [`${apiUrl}/product/report`, token],
+    ([url, token]) => fetchWithToken(url, token),
+  );
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOption(event.target.value);
   };
+
+  if (error) return <div>Error loading data.</div>;
+  if (!data) return <div>Loading...</div>;
 
   return (
     <div className="p-4 rounded-lg shadow bg-white">
@@ -53,7 +62,7 @@ const ProductSoldChart: React.FC = () => {
           <option value="Last month">Last month</option>
         </select>
       </div>
-      <hr className="border-gray-300 mb-4" /> {/* Divider added here */}
+      <hr className="border-gray-300 mb-4" />
       <ResponsiveContainer width="100%" height={300}>
         <BarChart
           data={data}
@@ -61,14 +70,14 @@ const ProductSoldChart: React.FC = () => {
           onMouseLeave={() => setActiveIndex(null)}
         >
           <XAxis
-            dataKey="date"
+            dataKey="created_at"
             tick={{ fill: '#A0AEC0' }}
             tickLine={false}
             axisLine={false}
           />
           <Tooltip content={<CustomTooltip />} />
           <Bar
-            dataKey="items"
+            dataKey="total"
             radius={[10, 10, 0, 0]}
             fill="#A0AEC0"
             onMouseEnter={(_, index) => setActiveIndex(index)}
@@ -86,7 +95,7 @@ const ProductSoldChart: React.FC = () => {
               />
             ))}
             <LabelList
-              dataKey="items"
+              dataKey="income"
               position="top"
               fill="#4A5568"
               fontSize={12}
