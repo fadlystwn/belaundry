@@ -1,31 +1,9 @@
 import React, { useState } from 'react';
 import useSWR from 'swr';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  Tooltip,
-  ResponsiveContainer,
-  LabelList,
-} from 'recharts';
+import { BarChart, Bar, XAxis, ResponsiveContainer, LabelList } from 'recharts';
 import { fetchWithToken } from '../utils/fetchApi';
 import { useAuth } from '../hooks/useAuth';
-export interface Report {
-  created_at: string;
-  total: number;
-  income: string;
-}
-
-const CustomTooltip = ({ active, payload }: any) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className="bg-white p-2 shadow rounded">
-        <p className="text-gray-700">{`${payload[0].value} Items`}</p>
-      </div>
-    );
-  }
-  return null;
-};
+import { Report } from '../interfaces/Report';
 
 const ProductSoldChart: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -75,25 +53,26 @@ const ProductSoldChart: React.FC = () => {
             tickLine={false}
             axisLine={false}
           />
-          <Tooltip content={<CustomTooltip />} />
           <Bar
             dataKey="total"
             radius={[10, 10, 0, 0]}
             fill="#A0AEC0"
             onMouseEnter={(_, index) => setActiveIndex(index)}
           >
-            {data.map((entry, index) => (
-              <rect
-                key={`bar-${index}`}
-                x={index * 45 + 15}
-                y={300 - entry.items * 30}
-                width={35}
-                height={entry.items * 30}
-                fill={activeIndex === index ? '#3E7DAB' : '#A0AEC0'}
-                rx="10"
-                ry="10"
-              />
-            ))}
+            {data.map((entry: Report, index: number) => {
+              return (
+                <rect
+                  key={`bar-${index}`}
+                  x={index * 45 + 15}
+                  y={300 - entry.total * 30}
+                  width={35}
+                  height={Number(entry.income) * 30}
+                  fill={activeIndex === index ? '#3E7DAB' : '#A0AEC0'}
+                  rx="10"
+                  ry="10"
+                />
+              );
+            })}
             <LabelList
               dataKey="income"
               position="top"
